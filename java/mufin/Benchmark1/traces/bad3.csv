@@ -1,0 +1,4 @@
+create,A,B
+create,B,1
+invalidate,B
+sendCritical,B

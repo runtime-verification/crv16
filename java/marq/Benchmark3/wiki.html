@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<title>Java Team3 Benchmark3 - CRV</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":!1,"wgNamespaceNumber":0,"wgPageName":"Java_Team3_Benchmark3","wgTitle":"Java Team3 Benchmark3","wgCurRevisionId":217,"wgRevisionId":217,"wgArticleId":32,"wgIsArticle":!0,"wgIsRedirect":!1,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":!1,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Java_Team3_Benchmark3","wgRelevantArticleId":32,"wgIsProbablyEditable":!1,"wgRestrictionEdit":[],"wgRestrictionMove":[]});mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\"});});mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","skins.vector.js"]);
+} );</script>
+<link rel="stylesheet" href="/wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}</style>
+<script async="" src="/wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="generator" content="MediaWiki 1.26.2" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="CRV (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://crv.liflab.ca/wiki/api.php?action=rsd" />
+<link rel="copyright" href="https://www.gnu.org/copyleft/fdl.html" />
+<link rel="alternate" type="application/atom+xml" title="CRV Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/wiki/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Java_Team3_Benchmark3 skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Java Team3 Benchmark3</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From CRV</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p><b>ResourceLifecycle</b>. This property is about an abstracted resource management system and captures the required lifecycle of a resource object.
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Benchmark_Data"><span class="tocnumber">1</span> <span class="toctext">Benchmark Data</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#The_Trace_Part"><span class="tocnumber">1.1</span> <span class="toctext">The Trace Part</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#The_Property_Part"><span class="tocnumber">1.2</span> <span class="toctext">The Property Part</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="#Informal_Description"><span class="tocnumber">1.2.1</span> <span class="toctext">Informal Description</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="#Demonstration_Traces"><span class="tocnumber">1.2.2</span> <span class="toctext">Demonstration Traces</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="#Formal_Specification"><span class="tocnumber">1.2.3</span> <span class="toctext">Formal Specification</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="#A_FO-LTL_Specification"><span class="tocnumber">1.2.4</span> <span class="toctext">A FO-LTL Specification</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-8"><a href="#Clarification_Requests"><span class="tocnumber">2</span> <span class="toctext">Clarification Requests</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Benchmark_Data">Benchmark Data</span></h2>
+<h3><span class="mw-headline" id="The_Trace_Part">The Trace Part</span></h3>
+<p>See marq/java/bench3
+</p><p>The program consists of 6 Java files. The main file Workload.java (deterministically) creates a number of tasks, commands and resources and executes the tasks. The tasks run each of their commands in turn, which request resources from the Manager. Each resource can only be granted to one command at any time, so some commands must wait until the required resource are free. Commands have a duration.
+An AspectJ file is provided that prints the events and can be used for monitoring. 
+</p><p>To compile the program with instrumentation run
+</p>
+<pre>   java -cp "lib/*" org.aspectj.tools.ajc.Main -source 1.7 -d bin -sourceroots bench3
+</pre>
+<p>and to execute the program run
+</p>
+<pre>   java -cp "lib/*:bin" bench3.Workload
+</pre>
+<p>The program will produce 90,737,740 events. With 45,347,515 request events, 42,710 grant events, 45,304,805 deny events and 42,710 release events. The program satisfies the property.
+</p>
+<h3><span class="mw-headline" id="The_Property_Part">The Property Part</span></h3>
+<h4><span class="mw-headline" id="Informal_Description">Informal Description</span></h4>
+<p>In this scenario, a task performs many commands and each command requires resources to be taken to execute. This property only concerns the correct management of resource objects with respect to a task and command. A resource can be requested for a command running in a task - all the following activities are with respect to a command running in a task. The request can be denied or granted. If denied it can be requested again. If granted it must be released before it is requested again. All requests must be answered and all resources must be released before the end of the program. A resource cannot be granted or denied if not requested. A resource cannot be released if not granted. A resource cannot be requested if already granted.
+</p><p>The relevant events are therefore
+</p>
+<ul><li> request(task,command,resource)</li>
+<li> grant(task,command,resource)</li>
+<li> deny(task,command,resource)</li>
+<li> release(task,command,resource)</li></ul>
+<h4><span class="mw-headline" id="Demonstration_Traces">Demonstration Traces</span></h4>
+<p>The following traces should be accepted
+</p>
+<pre>   request(T,C,A).deny(T,C,A).request(T,C,A).grant(T,C,A).release(T,C,A)
+   request(T1,C,A).request(T2,C,A).request(T3,C,A).grant(T1,C,A).deny(T3,C,A).deny(T2,C,A).release(T1,C,A)
+   request(T,C,A).deny(T,C,A)
+</pre>
+<p>The first and third traces are valid as the single task T, command C and resource A follow the prescribed lifecycle. The second trace is valid as there are three tasks T1, T2, and T3, which each individually interact with C and A in the valid way.
+</p><p>This following trace is invalid as the resource A is not released at the end of the trace. 
+</p>
+<pre>   request(T,C,A).deny(T,C,A).request(T,C,A).grant(T,C,A)
+</pre>
+<p>The following trace is invalid for task T1 and command C as the resource A is granted without first being released - in the case of the second grant.
+</p>
+<pre>   request(T1,C,A).request(T2,C,A).request(T3,C,A).grant(T1,C,A).deny(T3,C,A).deny(T2,C,A). grant(T1,C,A).release(T1,C1,A)
+</pre>
+<p>The following trace is invalid as the resource A is denied to thread T and command C without first being requested - in the case of the second deny.
+</p>
+<pre>   request(T,C,A).deny(T,C,A).deny(T,C,A)
+</pre>
+<h4><span class="mw-headline" id="Formal_Specification">Formal Specification</span></h4>
+<p>The following QEA captures this property
+</p>
+<pre>   qea(ResourceLifecycle){
+     Forall(task,command,resource)
+
+     accept next(free){
+       request(task,command,resource) -&gt; requested 
+     }
+     next(requested){
+       deny(task,command,resource) -&gt; free
+       grant(task,command,resource) -&gt; granted
+     }
+     next(granted){
+       release(task,command,resource) -&gt; free
+     }
+   }
+</pre>
+<p>A next state indicates that events that have not been mentioned lead to an implicit failure state.
+Note that this property is with respect to a command and task. It does not hold for a resource individually.
+</p><p><br />
+</p>
+<h4><span class="mw-headline" id="A_FO-LTL_Specification">A FO-LTL Specification</span></h4>
+<p>The following is a first-order LTL formulation of the property
+</p>
+<pre>  (forall t)(forall c)(forall r)(
+       [ not ( grant(t,c,r) or deny(t,c,r) or release(t,c,r) ) Until request(t,c,r) ] and
+       [ request(t,c,r) =&gt; next ( grant(t,c,r) or deny(t,c,r)  ) ] and
+       [ grant(t,c,r) =&gt; next ( release(t,c,r)  ) ] and
+       [ (deny(t,c,r) or release(t,c,r)) =&gt; next ( request(t,c,r) or end ) ]
+   )
+</pre>
+<p>where
+</p>
+<pre>   end = never ( request(t,c,r) or grant(t,c,r) or deny(t,c,r) or release(t,c,r) )
+</pre>
+<h2><span class="mw-headline" id="Clarification_Requests">Clarification Requests</span></h2>
+<p>This is a space where other teams can ask for clarifications and the submitting team can answer. When a team requests a clarification, the team should be mentioned in the request and the request timestamped. The team submitting the benchmark should ensure they watch this page so that they get notifications of questions.
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20190130231301
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.009 seconds
+Real time usage: 0.010 seconds
+Preprocessor visited node count: 31/1000000
+Preprocessor generated node count: 36/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key my_wiki:pcache:idhash:32-0!*!*!!en!*!* and timestamp 20190130231301 and revision id 217
+ -->
+</div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="http://crv.liflab.ca/wiki/index.php?title=Java_Team3_Benchmark3&amp;oldid=217">http://crv.liflab.ca/wiki/index.php?title=Java_Team3_Benchmark3&amp;oldid=217</a>"					</div>
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=Java+Team3+Benchmark3" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/index.php/Java_Team3_Benchmark3"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/wiki/index.php?title=Talk:Java_Team3_Benchmark3&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/index.php/Java_Team3_Benchmark3" >Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="/wiki/index.php?title=Java_Team3_Benchmark3&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/wiki/index.php?title=Java_Team3_Benchmark3&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/wiki/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search" title="Search CRV [f]" accesskey="f" id="searchInput" /><input type="hidden" value="Special:Search" name="title" /><input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton" /><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton" />							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/index.php/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/index.php/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-recentchanges"><a href="/wiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-randompage"><a href="/wiki/index.php/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li><li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/index.php/Special:WhatLinksHere/Java_Team3_Benchmark3" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/index.php/Special:RecentChangesLinked/Java_Team3_Benchmark3" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="/wiki/index.php/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="/wiki/index.php?title=Java_Team3_Benchmark3&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="/wiki/index.php?title=Java_Team3_Benchmark3&amp;oldid=217" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/wiki/index.php?title=Java_Team3_Benchmark3&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 June 2016, at 09:34.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/wiki/index.php/CRV:Privacy_policy" title="CRV:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/index.php/CRV:About" title="CRV:About">About CRV</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/index.php/CRV:General_disclaimer" title="CRV:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://www.gnu.org/copyleft/fdl.html"><img src="/wiki/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" /></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/wiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/wiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /wiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31" /></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.loader.state({"user":"ready","user.groups":"ready"});mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);
+} );</script><script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgBackendResponseTime":80});
+} );</script>
+	</body>
+</html>

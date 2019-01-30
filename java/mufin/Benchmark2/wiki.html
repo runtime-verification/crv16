@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<title>Java Team4 Benchmark2 - CRV</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":!1,"wgNamespaceNumber":0,"wgPageName":"Java_Team4_Benchmark2","wgTitle":"Java Team4 Benchmark2","wgCurRevisionId":241,"wgRevisionId":241,"wgArticleId":14,"wgIsArticle":!0,"wgIsRedirect":!1,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":!1,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Java_Team4_Benchmark2","wgRelevantArticleId":14,"wgIsProbablyEditable":!1,"wgRestrictionEdit":[],"wgRestrictionMove":[]});mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\"});});mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","skins.vector.js"]);
+} );</script>
+<link rel="stylesheet" href="/wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}</style>
+<script async="" src="/wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="generator" content="MediaWiki 1.26.2" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="CRV (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://crv.liflab.ca/wiki/api.php?action=rsd" />
+<link rel="copyright" href="https://www.gnu.org/copyleft/fdl.html" />
+<link rel="alternate" type="application/atom+xml" title="CRV Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/wiki/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Java_Team4_Benchmark2 skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Java Team4 Benchmark2</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From CRV</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>This benchmark is about a multiplexer with different channels and connected streams and clients. Such a Multiplexer consists of four channels. Only one if the four channels is active. Call Multiplexer#nextChannel() to activate the next channel. The four channels are activated in a cyclic manner.
+</p><p>On the outer side the multiplexer is connected to four streams. Calling Multiplexer#renewChannel() closes the stream of the currently active channel and directly opens up a new stream.
+</p><p>On the inner side many clients can be connected to the multiplexer. A new client is created through a call of Multiplexer#getClient().
+</p><p>Category: Software Engineering
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Benchmark_Data"><span class="tocnumber">1</span> <span class="toctext">Benchmark Data</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Specification_Information"><span class="tocnumber">1.1</span> <span class="toctext">Specification Information</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Instrumentation_Information"><span class="tocnumber">1.2</span> <span class="toctext">Instrumentation Information</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Program_Information"><span class="tocnumber">1.3</span> <span class="toctext">Program Information</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Example_Traces"><span class="tocnumber">1.4</span> <span class="toctext">Example Traces</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Comments"><span class="tocnumber">2</span> <span class="toctext">Comments</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Clarification_Requests"><span class="tocnumber">3</span> <span class="toctext">Clarification Requests</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Benchmark_Data">Benchmark Data</span></h2>
+<h3><span class="mw-headline" id="Specification_Information">Specification Information</span></h3>
+<p>We want to monitor the following two properties:
+(1) After its creation such a client is fixed to the current channel and must not be used if another channel is active.
+(2) Once the channel of a client gets renewed the client is invalid and must not be used any more.
+</p><p>forall m, forall c: We use the following automaton consisting of six states and two fail states. If no matching transition is defined the automaton stays in its current state. The initial state is called start. The states channel_invalid_fail and channel_not_active_fail are the fail states. The states with the prefix off implement a modulo counter storing the offset of the client and the multiplexer.
+</p>
+<ul><li> start, create(m,c) -&gt; off0</li>
+<li> off0, next(m) -&gt; off1</li>
+<li> off0, renew(m) -&gt; invalid</li>
+<li> off1, next(m) -&gt; off2</li>
+<li> off1, use(c) -&gt; channel_not_active_fail</li>
+<li> off2, next(m) -&gt; off3</li>
+<li> off2, use(c) -&gt; channel_not_active_fail</li>
+<li> off3, next(m) -&gt; off0</li>
+<li> off3, use(c) -&gt; channel_not_active_fail</li>
+<li> invalid, use(c) -&gt; channel_invalid_fail</li></ul>
+<p>The meaning of the conditions used in the transitions is as follows:
+</p>
+<ul><li> create(m,c) calls m.client() on the multiplexer m with the resulting new client c,</li>
+<li> next(m) calls 'm.nextChannel()' on the multiplexer m,</li>
+<li> renew(m) calls 'm.renew()' on the multiplexer m and</li>
+<li> use(c) calls 'c.use()' on the client c.</li></ul>
+<h3><span class="mw-headline" id="Instrumentation_Information">Instrumentation Information</span></h3>
+<p>AspectJ is used for the instrumentation. The pointcuts are
+</p>
+<ol><li> pointcut create(Multiplexer m)&#160;: call(Client Multiplexer.client()) &amp;&amp; target(m);</li>
+<li> pointcut next(Multiplexer m)&#160;: call(* Multiplexer.nextChannel()) &amp;&amp; target(m);</li>
+<li> pointcut renew(Multiplexer m)&#160;: call(* Multiplexer.renewChannel()) &amp;&amp; target(m);</li>
+<li> pointcut use(Client c)&#160;: call(* Client.use()) &amp;&amp; target(c);</li></ol>
+<p>The events from the specification are mapped to these pointcuts in the obvious manner.
+</p>
+<h3><span class="mw-headline" id="Program_Information">Program Information</span></h3>
+<p>Location: Java_track/Mufin/Benchmark2
+</p><p>The benchmark can be compiled via the compile.sh script, compiled with instrumentation via the compile-instrumented.sh script and run via the run.sh script. 
+</p><p>Number of times the pointcuts are called in the different main classes:
+</p><p>create: 2000008
+next: 20
+renew: 4
+use: 9
+verdict: property is violated
+</p>
+<h3><span class="mw-headline" id="Example_Traces">Example Traces</span></h3>
+<p>We use the same notation as in the formal specification. m is a multiplexer and c1 and c2 are clients.
+</p><p>Three valid traces are:
+</p>
+<ol><li> create(m,c1)next(m)next(m)next(m)next(m)use(c1)</li>
+<li> create(m,c1)next(m)create(m,c2)next(m)next(m)next(m)use(c1)next(m)use(c2)</li>
+<li> create(m,c1)renew(m)create(m,c2)use(c2)</li></ol>
+<p>Three invalid traces are:
+</p>
+<ol><li> create(m,c1)next(m)use(c1)</li>
+<li> create(m,c1)renew(m)use(c1)</li>
+<li> create(m,c1)next(m)create(m,c2)next(m)next(m)next(m)use(c1)use(c2)</li></ol>
+<h2><span class="mw-headline" id="Comments">Comments</span></h2>
+<h2><span class="mw-headline" id="Clarification_Requests">Clarification Requests</span></h2>
+<p>The format changed from last year so the benchmark isn't quite organised in the way required for this year. However, as it is quite a bit of work to reformat it for little obvious gain, don't worry. If anybody needs clarifications due to the different format please post them here -- Giles 2016-07-06
+</p><p>Please indicate how to (compile? and ) run the benchmark for the competition (if there is a choice of arguments give which ones should be used in the competition) -- Giles 2016-07-06
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20190130005857
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.007 seconds
+Real time usage: 0.007 seconds
+Preprocessor visited node count: 27/1000000
+Preprocessor generated node count: 32/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key my_wiki:pcache:idhash:14-0!*!*!!en!*!* and timestamp 20190130005857 and revision id 241
+ -->
+</div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="http://crv.liflab.ca/wiki/index.php?title=Java_Team4_Benchmark2&amp;oldid=241">http://crv.liflab.ca/wiki/index.php?title=Java_Team4_Benchmark2&amp;oldid=241</a>"					</div>
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=Java+Team4+Benchmark2" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/index.php/Java_Team4_Benchmark2"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/wiki/index.php?title=Talk:Java_Team4_Benchmark2&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/index.php/Java_Team4_Benchmark2" >Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="/wiki/index.php?title=Java_Team4_Benchmark2&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/wiki/index.php?title=Java_Team4_Benchmark2&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/wiki/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search" title="Search CRV [f]" accesskey="f" id="searchInput" /><input type="hidden" value="Special:Search" name="title" /><input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton" /><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton" />							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/index.php/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/index.php/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-recentchanges"><a href="/wiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-randompage"><a href="/wiki/index.php/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li><li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/index.php/Special:WhatLinksHere/Java_Team4_Benchmark2" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/index.php/Special:RecentChangesLinked/Java_Team4_Benchmark2" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="/wiki/index.php/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="/wiki/index.php?title=Java_Team4_Benchmark2&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="/wiki/index.php?title=Java_Team4_Benchmark2&amp;oldid=241" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/wiki/index.php?title=Java_Team4_Benchmark2&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 July 2016, at 04:58.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/wiki/index.php/CRV:Privacy_policy" title="CRV:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/index.php/CRV:About" title="CRV:About">About CRV</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/index.php/CRV:General_disclaimer" title="CRV:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://www.gnu.org/copyleft/fdl.html"><img src="/wiki/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" /></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/wiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/wiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /wiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31" /></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.loader.state({"user":"ready","user.groups":"ready"});mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);
+} );</script><script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgBackendResponseTime":62});
+} );</script>
+	</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<title>Java Team4 Benchmark1 - CRV</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":!1,"wgNamespaceNumber":0,"wgPageName":"Java_Team4_Benchmark1","wgTitle":"Java Team4 Benchmark1","wgCurRevisionId":240,"wgRevisionId":240,"wgArticleId":13,"wgIsArticle":!0,"wgIsRedirect":!1,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":!1,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Java_Team4_Benchmark1","wgRelevantArticleId":13,"wgIsProbablyEditable":!1,"wgRestrictionEdit":[],"wgRestrictionMove":[]});mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\"});});mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","skins.vector.js"]);
+} );</script>
+<link rel="stylesheet" href="/wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}</style>
+<script async="" src="/wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="generator" content="MediaWiki 1.26.2" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="CRV (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://crv.liflab.ca/wiki/api.php?action=rsd" />
+<link rel="copyright" href="https://www.gnu.org/copyleft/fdl.html" />
+<link rel="alternate" type="application/atom+xml" title="CRV Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/wiki/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Java_Team4_Benchmark1 skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Java Team4 Benchmark1</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From CRV</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>This benchmark aims at measuring the performance of tracking the behaviour
+of a large number of communicating entities. These entities are represented
+by objects, but they are is asumed to be external to the benchmark program.
+A scenario where this is applicable is a coordinator node in a large
+networked cluster spanning several machines. In such a scenario it should
+be avoided to replicate the behaviour of the external nodes for ther
+purpose of runtime verification, as this defeats the purpose of
+distributing work in a cluster.
+</p><p>Category: Concurrency
+</p><p><br />
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Benchmark_Data"><span class="tocnumber">1</span> <span class="toctext">Benchmark Data</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Specification_Information"><span class="tocnumber">1.1</span> <span class="toctext">Specification Information</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Instrumentation_Information"><span class="tocnumber">1.2</span> <span class="toctext">Instrumentation Information</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Program_Information"><span class="tocnumber">1.3</span> <span class="toctext">Program Information</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Example_Traces"><span class="tocnumber">1.4</span> <span class="toctext">Example Traces</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Comments"><span class="tocnumber">2</span> <span class="toctext">Comments</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Clarification_Requests"><span class="tocnumber">3</span> <span class="toctext">Clarification Requests</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Benchmark_Data">Benchmark Data</span></h2>
+<h3><span class="mw-headline" id="Specification_Information">Specification Information</span></h3>
+<p>The benchmark maintains a tree data structure consisting of two different
+type of objects: inner nodes and leaf nodes. There is a single root node of
+type InnerNode. Each InnerNode has an ordered list of InnerNode children
+and an ordered list of LeafNode children. The object graph is an actual
+tree, i.e. there are no cycles or multiple references to the same object.
+</p><p>The structure of the tree can be changed dynamically by adding or removing
+nodes of either type.
+</p><p>The specification considers 6 different abstract events:
+</p>
+<ul><li> create(n)</li>
+<li> send(i)</li>
+<li> sendCritical(i)</li>
+<li> reset(i)</li>
+<li> process(l)</li>
+<li> invalidate(n)</li></ul>
+<p>Where i, l and n are a sequence of object IDs, which form a consecutive
+path starting from the root node to an inner, a leaf or an arbitrary node
+respectively. It can be assumed that all occuring events are a valid path
+in the tree and end in a node of the correct type for the event.
+</p><p>Informally every leaf node has an external buffer that can hold up to one
+message. Whenever a send operation is performed on an inner node, all
+descendant leaf nodes which currently have an empty buffer store this
+message in their buffer. Whenever a sendCritical operation is performed the
+same behaviour as for a send operation is performed, but the specification
+requires that all descendant leaf nodes have an empty buffer. A reset
+operation on an inner node clears the buffers of all descendant leaf nodes.
+A process operation on a leaf node, clears the buffer of the leaf node, but
+the specification requires that the buffer contains a message for this
+operation to be valid. Finally both types of nodes are invalidated before
+they are removed from the tree structure. After an invalidate operation is
+performed on a node, none of the previously described operations may be
+performed on the node or any of its descendant nodes.
+</p><p>The formal specification is given in the form of a symbolic monitor for
+leaf nodes and a symbolic monitor for inner nodes:
+</p>
+<ul><li> Leaf Nodes:
+<ul><li> State space Q = {0,1,2,3,4}</li>
+<li> Initial state: 0</li>
+<li> Quantification: ∀l&#160;: LeafNodes</li>
+<li> Transitions:
+<ul><li> δ(0, create(l)) = 1</li>
+<li> δ(0, otherwise) = 0</li>
+<li> δ(1, ∃m&#160;: send(m) ∧ prefix(m, l)) = 2</li>
+<li> δ(1, ∃m&#160;: sendCritical(m) ∧ prefix(m, l)) = 2</li>
+<li> δ(1, ∃m&#160;: reset(m) ∧ prefix(m, l)) = 1</li>
+<li> δ(1, ∃m&#160;: invalidate(m) ∧ prefix(m, l)) = 3</li>
+<li> δ(1, process(l)) = 4</li>
+<li> δ(1, otherwise) = 1</li>
+<li> δ(2, ∃m&#160;: send(m) ∧ prefix(m, l)) = 2</li>
+<li> δ(2, ∃m&#160;: sendCritical(m) ∧ prefix(m, l)) = 4</li>
+<li> δ(2, ∃m&#160;: reset(m) ∧ prefix(m, l)) = 1</li>
+<li> δ(2, ∃m&#160;: invalidate(m) ∧ prefix(m, l)) = 3</li>
+<li> δ(2, process(l)) = 1</li>
+<li> δ(2, otherwise) = 2</li>
+<li> δ(3, process(l)) = 4</li>
+<li> δ(3, otherwise) = 3</li>
+<li> δ(4, true) = 4</li></ul></li>
+<li> Accepting states (with output ⊤) F = {0,1,2,3}</li></ul></li>
+<li> Inner Nodes:
+<ul><li> State space Q = {0,1,2,3}</li>
+<li> Initial state: 0</li>
+<li> Quantification: ∀i&#160;: InnerNodes</li>
+<li> Transitions:
+<ul><li> δ(0, create(i)) = 1</li>
+<li> δ(0, otherwise) = 0</li>
+<li> δ(1, ∃m&#160;: invalidate(m) ∧ prefix(m, i)) = 2</li>
+<li> δ(1, otherwise) = 1</li>
+<li> δ(2, send(i)) = 3</li>
+<li> δ(2, sendCritical(i)) = 3</li>
+<li> δ(2, reset(i)) = 3</li>
+<li> δ(3, true) = 3</li></ul></li>
+<li> Accepting states (with output ⊤) F = {0,1,2}</li></ul></li></ul>
+<p><br />
+The prefix(m, n) is a reflexive relation that is true if m is a prefix of
+(or equal to) n.
+</p>
+<h3><span class="mw-headline" id="Instrumentation_Information">Instrumentation Information</span></h3>
+<p>The concrete events are specified as AspectJ pointcuts, and are also
+specified in the file InstrumentationAspect.aj.
+</p><p>The concrete events only refer to a single object while the abstract events
+require a sequence of object IDs that represents the path from the root
+node. To allow the runtime verification to keep track of the required
+paths, the two concrete events for the create(n) event contain the parent
+node:
+</p>
+<pre>   public pointcut newInnerChild(InnerNode node, int i)&#160;:
+       call(* InnerNode.addInnerNode(int)) &amp;&amp; args(i) &amp;&amp; target(node);
+</pre>
+<pre>   public pointcut newLeafChild(InnerNode node, int i)&#160;:
+       call(* InnerNode.addLeafNode(int)) &amp;&amp; args(i) &amp;&amp; target(node);
+</pre>
+<p>They have the parent node as a paremeter and the child node, which is the n
+in create(n) as return value.
+</p><p>As a special case an abstract create([r]) event occurs first, when one of
+the two concrete abstract events occurs with a parent object r that is not
+yet a child of any other object.
+</p><p><br />
+The abstract events send(i), sendCritical(i), rest(i) and process(l)
+correspond to the concrete events given by:
+</p>
+<pre>   public pointcut send(InnerNode node)&#160;:
+       call(* InnerNode.send()) &amp;&amp; target(node);
+</pre>
+<pre>   public pointcut sendCritical(InnerNode node)&#160;:
+       call(* InnerNode.sendCritical()) &amp;&amp; target(node);
+</pre>
+<pre>   public pointcut reset(InnerNode node)&#160;:
+       call(* InnerNode.reset()) &amp;&amp; target(node);
+</pre>
+<pre>   public pointcut process(LeafNode node)&#160;:
+       call(* LeafNode.process()) &amp;&amp; target(node);
+</pre>
+<p>As mentioned before, the concrete events contain only a single object,
+which has to be augmented by the path from the root to generate the
+corresponding abstract event.
+</p><p><br />
+The invalidate(n) event is given by two different concrete events, one for
+inner nodes and one for leaf nodes:
+</p>
+<pre>   public pointcut invalidateInner(InnerNode node, int i)&#160;:
+       call(* InnerNode.removeInnerNode(int)) &amp;&amp; args(i) &amp;&amp; target(node);
+</pre>
+<pre>   public pointcut invalidateLeaf(InnerNode node, int i)&#160;:
+       call(* InnerNode.removeLeafNode(int)) &amp;&amp; args(i) &amp;&amp; target(node);
+</pre>
+<p>In this case, due to the chosen API, the concrete events do not contain the
+target node, but its parent node. The InnerNode.getInnerNode(int index) and
+InnerNode.getLeafNode(int index) methods can be used to get the target node
+in the instrumentation. Again the path from the root has to be augmented to
+generate the corresponding abstract event.
+</p>
+<h3><span class="mw-headline" id="Program_Information">Program Information</span></h3>
+<p>Location: Java_track/Mufin/Benchmark1
+</p><p>The benchmark can be compiled via the compile.sh script, compiled with instrumentation via the compile-instrumented.sh script and run via the run.sh script.
+</p>
+<ul><li> The number of times the (concrete) events should be observed in the program:
+<ul><li> RunGood
+<ul><li> newInnerChild * 1117488</li>
+<li> newLeafChild * 4053676</li>
+<li> send * 2146847</li>
+<li> sendCritical * 713656</li>
+<li> reset * 704834</li>
+<li> process * 2820272</li>
+<li> invalidateInner * 1249</li>
+<li> invalidateLeaf * 1724</li></ul></li>
+<li> RunProcessAfterRemove
+<ul><li> newInnerChild * 1094892</li>
+<li> newLeafChild * 3964204</li>
+<li> send * 2089862</li>
+<li> sendCritical * 693990</li>
+<li> reset * 683744</li>
+<li> process * 2751055</li>
+<li> invalidateInner * 1234</li>
+<li> invalidateLeaf * 1630</li></ul></li>
+<li> RunSendAfterRemove
+<ul><li> newInnerChild * 1262283</li>
+<li> newLeafChild * 4478350</li>
+<li> send * 2066708</li>
+<li> sendCritical * 688434</li>
+<li> reset * 675714</li>
+<li> process * 2699530</li>
+<li> invalidateInner * 1260</li>
+<li> invalidateLeaf * 1674</li></ul></li>
+<li> RunSendCriticalAfterRemove
+<ul><li> newInnerChild * 1336456</li>
+<li> newLeafChild * 4721335</li>
+<li> send * 2102046</li>
+<li> sendCritical * 699816</li>
+<li> reset * 689716</li>
+<li> process * 2750065</li>
+<li> invalidateInner * 1199</li>
+<li> invalidateLeaf * 1689</li></ul></li>
+<li> RunResetAfterRemove
+<ul><li> newInnerChild * 1059894</li>
+<li> newLeafChild * 3764131</li>
+<li> send * 2117672</li>
+<li> sendCritical * 702734</li>
+<li> reset * 690549</li>
+<li> process * 2781575</li>
+<li> invalidateInner * 1234</li>
+<li> invalidateLeaf * 1717</li></ul></li>
+<li> RunEmptyProcess
+<ul><li> newInnerChild * 1050737</li>
+<li> newLeafChild * 3677949</li>
+<li> send * 2166524</li>
+<li> sendCritical * 721724</li>
+<li> reset * 711998</li>
+<li> process * 2830834</li>
+<li> invalidateInner * 1169</li>
+<li> invalidateLeaf * 1512</li></ul></li>
+<li> RunFullSendCritical
+<ul><li> newInnerChild * 1208958</li>
+<li> newLeafChild * 4360356</li>
+<li> send * 1996323</li>
+<li> sendCritical * 665400</li>
+<li> reset * 654291</li>
+<li> process * 2601753</li>
+<li> invalidateInner * 1282</li>
+<li> invalidateLeaf * 1796</li></ul></li></ul></li></ul>
+<ul><li> Verdict:
+<ul><li> property is violated</li></ul></li></ul>
+<h3><span class="mw-headline" id="Example_Traces">Example Traces</span></h3>
+<p>Capital letters represent object IDs of inner nodes, numbers represent object IDs of leaf nodes.
+</p><p>Valid:
+</p>
+<ul><li> create([A]) create([A, 0]) create([A, 1]) sendCritical([A]) send([A]) process([A, 0])</li>
+<li> create([A]) create([A, 0]) create([A, B]) create([A, B, 1]) send([A, 0]) reset([A]) send([A]) process([A, B, 1])</li>
+<li> create([A]) create([A, B]) create([A, B, 0]), create([A, B, 1]) send([A, B]) invalidate([A, B, 0]) process([A, B, 1]) sendCritical([A])</li></ul>
+<p>Invalid:
+</p>
+<ul><li> create([A]) create([A, B]) create([A, B, 0]) invalidate([A, B]) process([A, B, 0])</li>
+<li> create([A]) create([A, B]) create([A, B, C]) invalidate([A, B]) send([A, B, C])</li>
+<li> create([A]) create([A, B]) create([A, B, 1]) invalidate([A, B]) sendCritical([A, B])</li>
+<li> create([A]) create([A, B]) create([A, B, C]) invalidate([A, B, C]) reset([A, B, C])</li>
+<li> create([A]) create([A, B]) create([A, B, 0]) create([A, C]) send([A, C]) process([A, B, 0])</li>
+<li> create([A]) create([A, 0]) send([A]) sendCritical([A])</li></ul>
+<h2><span class="mw-headline" id="Comments">Comments</span></h2>
+<h2><span class="mw-headline" id="Clarification_Requests">Clarification Requests</span></h2>
+<p>The format changed from last year so the benchmark isn't quite organised in the way required for this year. However, as it is quite a bit of work to reformat it for little obvious gain, don't worry. If anybody needs clarifications due to the different format please post them here -- Giles 2016-07-06
+</p><p>Please indicate how to (compile? and ) run the benchmark for the competition (if there is a choice of arguments give which ones should be used in the competition)  -- Giles 2016-07-06
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20190130103256
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.014 seconds
+Real time usage: 0.028 seconds
+Preprocessor visited node count: 27/1000000
+Preprocessor generated node count: 32/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key my_wiki:pcache:idhash:13-0!*!*!!en!*!* and timestamp 20190130103256 and revision id 240
+ -->
+</div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="http://crv.liflab.ca/wiki/index.php?title=Java_Team4_Benchmark1&amp;oldid=240">http://crv.liflab.ca/wiki/index.php?title=Java_Team4_Benchmark1&amp;oldid=240</a>"					</div>
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=Java+Team4+Benchmark1" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/index.php/Java_Team4_Benchmark1"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/wiki/index.php?title=Talk:Java_Team4_Benchmark1&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/index.php/Java_Team4_Benchmark1" >Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="/wiki/index.php?title=Java_Team4_Benchmark1&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/wiki/index.php?title=Java_Team4_Benchmark1&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/wiki/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search" title="Search CRV [f]" accesskey="f" id="searchInput" /><input type="hidden" value="Special:Search" name="title" /><input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton" /><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton" />							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/index.php/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/index.php/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-recentchanges"><a href="/wiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-randompage"><a href="/wiki/index.php/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li><li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/index.php/Special:WhatLinksHere/Java_Team4_Benchmark1" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/index.php/Special:RecentChangesLinked/Java_Team4_Benchmark1" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="/wiki/index.php/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="/wiki/index.php?title=Java_Team4_Benchmark1&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="/wiki/index.php?title=Java_Team4_Benchmark1&amp;oldid=240" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/wiki/index.php?title=Java_Team4_Benchmark1&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 July 2016, at 04:57.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/wiki/index.php/CRV:Privacy_policy" title="CRV:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/index.php/CRV:About" title="CRV:About">About CRV</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/index.php/CRV:General_disclaimer" title="CRV:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://www.gnu.org/copyleft/fdl.html"><img src="/wiki/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" /></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/wiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/wiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /wiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31" /></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.loader.state({"user":"ready","user.groups":"ready"});mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);
+} );</script><script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgBackendResponseTime":58});
+} );</script>
+	</body>
+</html>

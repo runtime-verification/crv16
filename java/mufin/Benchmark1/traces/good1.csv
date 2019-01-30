@@ -1,0 +1,5 @@
+create,A,0
+create,A,1
+sendCritical,A
+send,A
+process,0

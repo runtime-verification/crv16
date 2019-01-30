@@ -1,0 +1,4 @@
+create,A,B
+create,B,0
+invalidate,B
+process,0

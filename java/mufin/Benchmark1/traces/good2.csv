@@ -1,0 +1,7 @@
+create,A,0
+create,A,B
+create,B,1
+send,0
+reset,A
+send,A
+process,1

@@ -1,0 +1,4 @@
+create,A,B
+create,B,C
+invalidate,C
+reset,C

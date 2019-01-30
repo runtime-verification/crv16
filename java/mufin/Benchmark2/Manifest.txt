@@ -1,0 +1,2 @@
+Main-Class: de.uni_luebeck.isp.rvwithunionfind.benchmarks.benchmark4.MainBadChannelInvalid
+Class-Path: lib/*

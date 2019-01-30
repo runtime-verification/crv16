@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<title>Java Team4 Benchmark3 - CRV</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":!1,"wgNamespaceNumber":0,"wgPageName":"Java_Team4_Benchmark3","wgTitle":"Java Team4 Benchmark3","wgCurRevisionId":242,"wgRevisionId":242,"wgArticleId":15,"wgIsArticle":!0,"wgIsRedirect":!1,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":!1,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Java_Team4_Benchmark3","wgRelevantArticleId":15,"wgIsProbablyEditable":!1,"wgRestrictionEdit":[],"wgRestrictionMove":[]});mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\"});});mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","skins.vector.js"]);
+} );</script>
+<link rel="stylesheet" href="/wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}</style>
+<script async="" src="/wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="generator" content="MediaWiki 1.26.2" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="CRV (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://crv.liflab.ca/wiki/api.php?action=rsd" />
+<link rel="copyright" href="https://www.gnu.org/copyleft/fdl.html" />
+<link rel="alternate" type="application/atom+xml" title="CRV Atom feed" href="/wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/wiki/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Java_Team4_Benchmark3 skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Java Team4 Benchmark3</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From CRV</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>This benchmark aims at measuring the performance of tracking a large number of
+individual objects and their behaviour with respect to a central synchronising 
+entity. A "device" has two switchable but exclusive operation modes. 
+"Work pieces" depend on one of those modes and can be "processed" iff the device
+is in the corresponding mode.
+</p><p>Category: Software Engineering
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Benchmark_Data"><span class="tocnumber">1</span> <span class="toctext">Benchmark Data</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Specification_Information"><span class="tocnumber">1.1</span> <span class="toctext">Specification Information</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Instrumentation_Information"><span class="tocnumber">1.2</span> <span class="toctext">Instrumentation Information</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Program_Information"><span class="tocnumber">1.3</span> <span class="toctext">Program Information</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Example_Traces"><span class="tocnumber">1.4</span> <span class="toctext">Example Traces</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Comments"><span class="tocnumber">2</span> <span class="toctext">Comments</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Clarification_Requests"><span class="tocnumber">3</span> <span class="toctext">Clarification Requests</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Benchmark_Data">Benchmark Data</span></h2>
+<h3><span class="mw-headline" id="Specification_Information">Specification Information</span></h3>
+<p>It should be verified that no work piece depending on mode x is processed (by
+invoking the method Piece.process()) while the device that created it 
+(invocation of Device.createPiece()) is in a mode different from x.
+The mode of a device is changed by invoking Device.toggleMode().
+</p><p>The resulting symbolic monitor is the following.
+</p>
+<ul><li> State space Q = {1,2,3,4}</li>
+<li> Quantification: ∀d∀p</li>
+<li> Transitions
+<ul><li> δ(1,¬create(d,p)) = 1, δ(1,create(d,p)) = 2</li>
+<li> δ(2,¬toggleMode(d)) = 2, δ(2,toggleMode(d)) = 3</li>
+<li> δ(3,¬toggleMode(d)∧¬process(p)) = 3, δ(3,toggleMode(d)) = 2, δ(3,process(p)) = 4</li>
+<li> δ(4,true) = 4</li></ul></li>
+<li> Accepting states (with output ⊤) F = {1,2,3}</li></ul>
+<p>The event create(d,p) holds iff the method Device.createPiece() is invoked on some
+Device object d instantiating a Piece object p.
+The predicate toggle(d) holds for some Device object d iff Device.toggleMode() 
+is invoked on d and process(p) is true whenever Piece.process() is called on a 
+Piece object p.
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="Instrumentation_Information">Instrumentation Information</span></h3>
+<p>Using AspectJ the events are identified as follows.
+</p><p><br />
+</p>
+<ul><li> The abstract event create(l,i) is identified by the pointcut/advice</li></ul>
+<pre> pointcut createPiece(Device d):  call(public Piece Device.createPiece() &amp;&amp; target(d));
+ after(Device d) returning(Piece p): createPiece(d) { ... }
+</pre>
+<ul><li> The abstract events toggleMode(d) and process(p) are identified by the pointcuts</li></ul>
+<pre>   pointcut deviceModeToggle(Device d)&#160;:  call(public void Device.toggleMode() &amp;&amp; target(d));
+   pointcut processPiece(Piece p)&#160;:  call(public void Piece.process() &amp;&amp; target(p));
+</pre>
+<p><br />
+</p>
+<h3><span class="mw-headline" id="Program_Information">Program Information</span></h3>
+<p>Location: Java_track/Mufin/Benchmark3
+</p><p>The benchmark can be compiled via the compile.sh script, compiled with instrumentation via the compile-instrumented.sh script and run via the run.sh script. 
+</p>
+<ul><li> The number of times the events should be observed in the program:
+<ul><li> create: 100282</li>
+<li> toggleMode: 9973</li>
+<li> process: 3</li></ul></li></ul>
+<ul><li> Verdict
+<ul><li> property is violated</li></ul></li></ul>
+<h3><span class="mw-headline" id="Example_Traces">Example Traces</span></h3>
+<p>Valid:
+</p>
+<ul><li> create(1,2) process(2) toggleMode(1)</li>
+<li> create(1,2) create(3,4) process(2) toggleMode(1) process(4) toggleMode(1) process(2)</li>
+<li> create(1,2) process(2) create(3,4) process(2) toggleMode(1) toggleMode(3) toggleMode(3) process(4)</li></ul>
+<p>Invalid:
+</p>
+<ul><li> create(1,2) toggleMode(1) process(2)</li>
+<li> create(1,2) create(3,4) process(2) toggleMode(1) toggleMode(3) togglemode(1) process(4)</li>
+<li> create(1,2) process(2) create(3,4) toggleMode(1) toggleMode(1) toggleMode(1) process(4) process(2)</li></ul>
+<p>(The numbers 1,…,4 represent object identities.)
+</p>
+<h2><span class="mw-headline" id="Comments">Comments</span></h2>
+<h2><span class="mw-headline" id="Clarification_Requests">Clarification Requests</span></h2>
+<p>The format changed from last year so the benchmark isn't quite organised in the way required for this year. However, as it is quite a bit of work to reformat it for little obvious gain, don't worry. If anybody needs clarifications due to the different format please post them here -- Giles 2016-07-06
+</p><p>Please indicate how to (compile? and ) run the benchmark for the competition (if there is a choice of arguments give which ones should be used in the competition) -- Giles 2016-07-06
+</p>
+<!-- 
+NewPP limit report
+Cached time: 20190130200042
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.007 seconds
+Real time usage: 0.008 seconds
+Preprocessor visited node count: 27/1000000
+Preprocessor generated node count: 32/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key my_wiki:pcache:idhash:15-0!*!*!!en!*!* and timestamp 20190130200042 and revision id 242
+ -->
+</div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="http://crv.liflab.ca/wiki/index.php?title=Java_Team4_Benchmark3&amp;oldid=242">http://crv.liflab.ca/wiki/index.php?title=Java_Team4_Benchmark3&amp;oldid=242</a>"					</div>
+				<div id='catlinks' class='catlinks catlinks-allhidden'></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="/wiki/index.php?title=Special:UserLogin&amp;returnto=Java+Team4+Benchmark3" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/index.php/Java_Team4_Benchmark3"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/wiki/index.php?title=Talk:Java_Team4_Benchmark3&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/index.php/Java_Team4_Benchmark3" >Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="/wiki/index.php?title=Java_Team4_Benchmark3&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/wiki/index.php?title=Java_Team4_Benchmark3&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/wiki/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search" title="Search CRV [f]" accesskey="f" id="searchInput" /><input type="hidden" value="Special:Search" name="title" /><input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton" /><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton" />							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/index.php/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/index.php/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-recentchanges"><a href="/wiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-randompage"><a href="/wiki/index.php/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li><li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/index.php/Special:WhatLinksHere/Java_Team4_Benchmark3" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/index.php/Special:RecentChangesLinked/Java_Team4_Benchmark3" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="/wiki/index.php/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="/wiki/index.php?title=Java_Team4_Benchmark3&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="/wiki/index.php?title=Java_Team4_Benchmark3&amp;oldid=242" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/wiki/index.php?title=Java_Team4_Benchmark3&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 July 2016, at 04:59.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="https://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3 or later</a> unless otherwise noted.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/wiki/index.php/CRV:Privacy_policy" title="CRV:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/index.php/CRV:About" title="CRV:About">About CRV</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/index.php/CRV:General_disclaimer" title="CRV:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://www.gnu.org/copyleft/fdl.html"><img src="/wiki/resources/assets/licenses/gnu-fdl.png" alt="GNU Free Documentation License 1.3 or later" width="88" height="31" /></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/wiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/wiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /wiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31" /></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.loader.state({"user":"ready","user.groups":"ready"});mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);
+} );</script><script>window.RLQ = window.RLQ || []; window.RLQ.push( function () {
+mw.config.set({"wgBackendResponseTime":59});
+} );</script>
+	</body>
+</html>
